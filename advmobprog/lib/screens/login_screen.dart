@@ -158,13 +158,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     );
                   },
-                  child: Text(
-                    "Continue as Guest",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Frutiger',
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/guest.png', 
+                        width: 30,
+                        height: 30,
+                      ),
+
+                      const SizedBox(width: 10),
+
+                      Text(
+                        "Continue as Guest",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'Frutiger',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 

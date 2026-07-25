@@ -20,8 +20,9 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 850), 
-    )..repeat();
+      duration: const Duration(milliseconds: 850),
+    )..repeat(reverse: true);
+
 
     Timer(const Duration(seconds: 5), () {
       if (mounted) {
@@ -36,29 +37,33 @@ class _SplashScreenState extends State<SplashScreen>
     super.dispose();
   }
 
-//Enhancement 2: Created my own Animated Loading (DONE)
-  Widget _buildDot(int index) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        double progress = (_controller.value + index * 0.25) % 1.0;
-        double scale = 0.5 + 0.5 * (1 - (progress - 0.5).abs() * 2); 
+Widget _buildDot(int index) {
+  return AnimatedBuilder(
+    animation: _controller,
+    builder: (context, child) {
+      double progress = (_controller.value + index * 0.2) % 1.0;
+
+      // Bigger pulse
+      double scale = 0.6 + 0.8 * (1 - (progress - 0.5).abs() * 2);
+
         return Transform.scale(
           scale: scale,
           child: child,
         );
       },
       child: Container(
-        width: 15.w,
-        height: 15.w,
-        margin: EdgeInsets.symmetric(horizontal: 5.w),
-        decoration: BoxDecoration(
+        width: 10,
+        height: 10,
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        decoration: const BoxDecoration(
           color: YF_DARK,
           shape: BoxShape.circle,
         ),
       ),
     );
   }
+
+//Enhancement 2: Created my own Animated Loading (DONE)
 
   @override
     Widget build(BuildContext context) {
@@ -102,7 +107,7 @@ class _SplashScreenState extends State<SplashScreen>
               child: Container(
                 padding: const EdgeInsets.all(5),
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/logo.png', 
                   width: 300.w,
                 ),
               ),
@@ -110,16 +115,32 @@ class _SplashScreenState extends State<SplashScreen>
 
             // Loading dots near the bottom
             Positioned(
-              bottom: 60.h,
+              bottom: 60,
               left: 0,
               right: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(5, (index) => _buildDot(index)),
+                children: [
+                  ClipOval(
+                    child: Image.asset(
+                      'assets/images/loading.png',
+                      width: 45,
+                      height: 45,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+
+                  const SizedBox(width: 12),
+
+                  Row(
+                    children: List.generate(5, (index) => _buildDot(index)),
+                  ),
+                ],
               ),
             ),
           ],
         ),
       );
     }
-    }
+  }
+    

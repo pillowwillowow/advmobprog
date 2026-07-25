@@ -55,6 +55,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
     elevation: 0,
 
+    toolbarHeight: MediaQuery.of(context).size.height * 0.15,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         bottom: Radius.circular(30),
@@ -64,7 +65,7 @@ class _SignupScreenState extends State<SignupScreen> {
     title: Text(
       "Create Account",
       style: TextStyle(
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: FontWeight.bold,
         fontFamily: 'Frutiger',
         color: YF_SECONDARY,
@@ -132,8 +133,8 @@ return Scaffold(
                   ),
 
                   validator: (value) {
-                    if (value!.length < 6) {
-                      return "Minimum of 6 characters";
+                    if (value!.length < 8) {
+                      return "Minimum of 8 characters";
                     }
                     return null;
                   },
